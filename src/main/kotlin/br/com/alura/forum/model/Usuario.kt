@@ -11,5 +11,6 @@ data class Usuario(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long? = null,
         val nome: String,
-        val email: String
+        val email: String,
+        val password: String
 )
