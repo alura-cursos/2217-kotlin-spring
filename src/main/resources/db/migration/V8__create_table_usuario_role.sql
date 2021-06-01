@@ -7,3 +7,4 @@ CREATE TABLE usuario_role(
     FOREIGN KEY(`role_id`) REFERENCES `role` (`id`)
 );
 
+INSERT INTO `usuario_role` (`id`, `usuario_id`, `role_id`) VALUES (1, 1, 1);

@@ -4,3 +4,4 @@ CREATE TABLE role(
     PRIMARY KEY(`id`)
 );
 
+INSERT INTO `role` (`id`, `nome`) VALUES (1, 'LEITURA_ESCRITA')
