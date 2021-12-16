@@ -7,13 +7,10 @@ import br.com.alura.forum.dto.TopicoView
 import br.com.alura.forum.exception.NotFoundException
 import br.com.alura.forum.mapper.TopicoFormMapper
 import br.com.alura.forum.mapper.TopicoViewMapper
-import br.com.alura.forum.model.Topico
 import br.com.alura.forum.repository.TopicoRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.*
-import java.util.stream.Collectors
 import javax.persistence.EntityManager
 
 @Service
