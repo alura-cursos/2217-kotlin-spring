@@ -5,7 +5,7 @@ object TopicoTest {
         id = 1,
         titulo = "Kotlin Basico",
         mensagem = "Aprendendo kotlin basico",
-        curso = Curso(nome = "Kotlin Basico", categoria = "Programacao"),
-        autor = Usuario(nome = "Joao", email = "jvc.martins", password = "123")
+        curso = CursoTest.build(),
+        autor = UsuarioTest.build()
     )
 }

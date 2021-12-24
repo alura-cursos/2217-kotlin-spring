@@ -1,11 +1,14 @@
 package br.com.alura.forum.integration
 
+import br.com.alura.forum.dto.TopicoPorCategoriaDto
+import br.com.alura.forum.model.TopicoTest
 import br.com.alura.forum.repository.TopicoRepository
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.MySQLContainer
@@ -15,10 +18,13 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @DataJpaTest
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class TopicoRepositoryTest {
+class TopicoRepositoryTest{
 
     @Autowired
     private lateinit var topicoRepository: TopicoRepository
+
+    private val paginacao = PageRequest.of(0,5)
+    private val topico = TopicoTest.build()
 
     companion object {
         @Container
@@ -38,9 +44,19 @@ class TopicoRepositoryTest {
     }
 
     @Test
-    fun `deve buscar um topico`() {
-        val relatorio = this.topicoRepository.relatorio()
+    fun `deve gerar um relatorio`() {
+        topicoRepository.save(topico)
+        val relatorio = topicoRepository.relatorio()
 
-        Assertions.assertThat(relatorio).isEmpty()
+        assertThat(relatorio).isNotNull
+        assertThat(relatorio[0]).isExactlyInstanceOf(TopicoPorCategoriaDto::class.java)
+    }
+
+    @Test
+    fun `deve buscar um topico por nome`() {
+        topicoRepository.save(topico)
+        val resultado = topicoRepository.findByCursoNome(nomeCurso = "Kotlin", paginacao = paginacao)
+
+        assertThat(resultado.totalElements).isEqualTo(1)
     }
 }

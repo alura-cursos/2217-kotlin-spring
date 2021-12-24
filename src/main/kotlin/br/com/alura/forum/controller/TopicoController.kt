@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
-import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("/topicos")
@@ -69,5 +68,4 @@ class TopicoController(private val service: TopicoService) {
     fun relatorio(): List<TopicoPorCategoriaDto> {
         return service.relatorio()
     }
-
 }
