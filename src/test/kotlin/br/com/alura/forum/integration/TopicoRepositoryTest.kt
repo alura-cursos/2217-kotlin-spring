@@ -49,7 +49,7 @@ class TopicoRepositoryTest{
         val relatorio = topicoRepository.relatorio()
 
         assertThat(relatorio).isNotNull
-        assertThat(relatorio[0]).isExactlyInstanceOf(TopicoPorCategoriaDto::class.java)
+        assertThat(relatorio.first()).isExactlyInstanceOf(TopicoPorCategoriaDto::class.java)
     }
 
     @Test

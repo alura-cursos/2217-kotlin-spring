@@ -2,7 +2,7 @@ package br.com.alura.forum.controller
 
 import br.com.alura.forum.config.JWTUtil
 import br.com.alura.forum.model.Role
-import br.com.alura.forum.model.Usuario
+import br.com.alura.forum.model.UsuarioTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -60,7 +60,7 @@ class TopicoControllerTest {
 
     private fun generateToken(): String? {
         val authorities = mutableListOf(Role(1, "LEITURA_ESCRITA"))
-        val usuario = Usuario(nome = "Ana da Silva", email = "ana@email.com", password = "123456")
+        val usuario = UsuarioTest.buildToToken()
 
         return jwtUtil.generateToken(usuario.email, authorities)
     }
