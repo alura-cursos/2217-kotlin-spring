@@ -139,11 +139,11 @@
 			<version>8.0.27</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.ninja-squad/springmockk -->
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
 		<dependency>
-			<groupId>com.ninja-squad</groupId>
-			<artifactId>springmockk</artifactId>
-			<version>3.1.0</version>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.2</version>
 		</dependency>
 
 	</dependencies>
