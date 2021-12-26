@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
@@ -37,25 +36,28 @@ class TopicoControllerTest {
     }
 
     companion object {
-        private const val TOKEN = "bearer %s"
+        private const val TOKEN = "%s"
         private const val URI = "/topicos"
+        private const val URI_WITH_PARAM = URI.plus("/%s")
     }
 
     @Test
     fun `deve retornar codigo 400 quando chamar topicos sem autenticacao`() {
-        mockMvc.perform( MockMvcRequestBuilders.get(URI)).andExpect(status().is4xxClientError)
+        mockMvc.get(URI).andExpect { status { is4xxClientError() } }
     }
 
     @Test
     fun `deve retornar codigo 200 quando chamar topicos e usuario estar autenticado`() {
-        mockMvc.perform(MockMvcRequestBuilders.get(URI)
-            .header("Authorization", TOKEN.format(jwt))).andExpect(status().isOk)
+        mockMvc.get(URI) {
+            headers { this.setBearerAuth(TOKEN.format(jwt)) }
+        }.andExpect { status { isOk() } }
     }
 
     @Test
     fun `deve retornar codigo 200 quando chamar topicos por id e usuario estar autenticado`() {
-        mockMvc.perform(MockMvcRequestBuilders.get(URI.plus("/1"))
-            .header("Authorization", TOKEN.format(jwt))).andExpect(status().isOk)
+        mockMvc.get(URI_WITH_PARAM.format("1")) {
+            headers { this.setBearerAuth(TOKEN.format(jwt)) }
+        }.andExpect { status { isOk() } }
     }
 
     private fun generateToken(): String? {
