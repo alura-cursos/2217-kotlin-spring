@@ -27,18 +27,18 @@ class TopicoControllerTest {
 
     private var jwt: String? = null
 
+    companion object {
+        private const val TOKEN = "%s"
+        private const val URI = "/topicos"
+        private const val URI_WITH_PARAM = URI.plus("/%s")
+    }
+
     @BeforeEach
     fun setup() {
         jwt = generateToken()
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .apply<DefaultMockMvcBuilder?>(SecurityMockMvcConfigurers
                 .springSecurity()).build()
-    }
-
-    companion object {
-        private const val TOKEN = "%s"
-        private const val URI = "/topicos"
-        private const val URI_WITH_PARAM = URI.plus("/%s")
     }
 
     @Test
