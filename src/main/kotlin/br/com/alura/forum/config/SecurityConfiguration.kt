@@ -31,7 +31,7 @@ class SecurityConfiguration(
         authenticated()?.
         and()
         http?.addFilterBefore(JWTLoginFilter(authManager = authenticationManager(), jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter().javaClass)
-        http?.addFilterBefore(JWTAuthenticationFilter(jwtUtil = jwtUtil), OncePerRequestFilter::class.java)
+        http?.addFilterBefore(JWTAuthenticationFilter(jwtUtil = jwtUtil), UsernamePasswordAuthenticationFilter::class.java)
         http?.sessionManagement()?.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
     }
 
